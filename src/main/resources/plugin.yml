@@ -1,0 +1,10 @@
+name: MinecraftAssistant
+version: @version@
+main: com.dolphln.minecraftassistant.Main
+api-version: 1.17
+authors: [Dolphln]
+description: MinecraftAssistant
+website: dolphln.com
+
+commands:
+  link:
