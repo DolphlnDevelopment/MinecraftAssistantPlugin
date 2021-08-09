@@ -2,10 +2,8 @@ package com.dolphln.minecraftassistant.core;
 
 import com.dolphln.minecraftassistant.Main;
 import com.dolphln.minecraftassistant.models.VoiceCommand;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.World;
+import com.dolphln.minecraftassistant.utils.RandomUtils;
+import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -62,21 +60,32 @@ public class CommandRunner {
         switch (command) {
             case "make time sunny" -> {
                 player.getWorld().setTime(6000);
+
+                plugin.sendMessage(player, "Making the weather sunny...");
             }
             case "make time rainy" -> {
                 player.getWorld().setThundering(false);
                 player.getWorld().setStorm(true);
+
+                plugin.sendMessage(player, "Making the world rain...");
             }
             case "make time night" -> {
                 player.getWorld().setTime(18000);
+
+                plugin.sendMessage(player, "Making the weather night...");
+
             }
             case "make time storm" -> {
                 player.getWorld().setThundering(true);
                 player.getWorld().setThunderDuration(1000000);
+
+                plugin.sendMessage(player, "Making the world storm...");
             }
             case "make time clear" -> {
                 player.getWorld().setThundering(false);
                 player.getWorld().setStorm(false);
+
+                plugin.sendMessage(player, "Clearing the weather...");
             }
             case "what's the weather" -> {
                 World world = player.getWorld();
@@ -93,39 +102,51 @@ public class CommandRunner {
             }
             case "give me velocity" -> {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 60*20, 2, false));
+                plugin.sendMessage(player, "Giving velocity...");
             }
             case "give me jump" -> {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 15*20, 2, false));
+                plugin.sendMessage(player, "Giving jump...");
             }
             case "give me regeneration" -> {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 5*20, 3, true));
+                plugin.sendMessage(player, "Giving regeneration...");
             }
             case "spawn a zombie" -> {
-                player.getWorld().spawnEntity(player.getLocation(), EntityType.ZOMBIE);
+                spawnEntity(player, EntityType.ZOMBIE);
+                plugin.sendMessage(player, "Spawning a zombie...");
             }
             case "spawn a creeper" -> {
-                player.getWorld().spawnEntity(player.getLocation(), EntityType.CREEPER);
-
+                spawnEntity(player, EntityType.CREEPER);
+                plugin.sendMessage(player, "Spawning a creeper...");
             }
             case "spawn a pig" -> {
-                player.getWorld().spawnEntity(player.getLocation(), EntityType.PIG);
-
+                spawnEntity(player, EntityType.PIG);
+                plugin.sendMessage(player, "Spawning a pig...");
             }
             case "spawn a cow" -> {
-                player.getWorld().spawnEntity(player.getLocation(), EntityType.COW);
-
+                spawnEntity(player, EntityType.COW);
+                plugin.sendMessage(player, "Spawning a cow...");
             }
             case "spawn a horse" -> {
-                player.getWorld().spawnEntity(player.getLocation(), EntityType.HORSE);
-
+                spawnEntity(player, EntityType.HORSE);
+                plugin.sendMessage(player, "Spawning a horse...");
             }
             case "give me diamonds" -> {
                 player.getInventory().addItem(new ItemStack(Material.DIAMOND, 13));
+                plugin.sendMessage(player, "Giving diamonds...");
             }
             case "give me a sword" -> {
                 player.getInventory().addItem(new ItemStack(Material.GOLDEN_SWORD, 1));
+                plugin.sendMessage(player, "Giving a sword...");
             }
         }
+    }
+
+    public void spawnEntity(Player player, EntityType entityType) {
+        Location loc = player.getLocation();
+
+        player.getWorld().spawnEntity(loc.add(RandomUtils.getRandomInt(-5, 5), 1, RandomUtils.getRandomInt(-5, 5)), entityType);
     }
 
     public boolean isRunning() {
