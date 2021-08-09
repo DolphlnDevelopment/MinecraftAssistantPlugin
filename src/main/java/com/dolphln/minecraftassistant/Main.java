@@ -5,6 +5,8 @@ import com.dolphln.minecraftassistant.core.CommandRunner;
 import com.dolphln.minecraftassistant.files.ConfigFile;
 import com.dolphln.minecraftassistant.socket.SocketServer;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
@@ -38,6 +40,10 @@ public final class Main extends JavaPlugin {
         this.socketServer.close();
 
         this.commandRunner.stop();
+    }
+
+    public void sendMessage(Player player, String message) {
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&eAssistant&6] &f" + message));
     }
 
     public static Main getInstance() {

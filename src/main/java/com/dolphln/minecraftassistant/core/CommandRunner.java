@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class CommandRunner {
 
     private final Main plugin;
-    private final String prefix = "&6[&eAssistant&6] ";
 
     private BukkitTask bukkitTask;
 
@@ -90,7 +89,7 @@ public class CommandRunner {
                     weather = "clear";
                 }
 
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + "&fToday is day " + (int) world.getGameTime()/24000 + ". The weather is " + weather + " at &6" + world.getTime() + "."));
+                plugin.sendMessage(player, "Today is day " + (int) world.getGameTime()/24000 + ". The weather is " + weather + " at &6" + world.getTime() + ".");
             }
             case "give me velocity" -> {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 60*20, 2, false));
