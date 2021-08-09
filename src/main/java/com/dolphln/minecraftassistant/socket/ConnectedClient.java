@@ -2,15 +2,12 @@ package com.dolphln.minecraftassistant.socket;
 
 import com.dolphln.minecraftassistant.models.VoiceCommand;
 import com.dolphln.minecraftassistant.utils.RandomUtils;
-import org.bukkit.entity.Player;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.net.SocketException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
 
 public class ConnectedClient extends Thread {
@@ -24,7 +21,7 @@ public class ConnectedClient extends Thread {
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
 
-    private Socket socket;
+    private final Socket socket;
 
     public ConnectedClient(ArrayList<VoiceCommand> commandsToDispatch, Socket socket) {
         this.commandsToDispatch = commandsToDispatch;
@@ -66,7 +63,7 @@ public class ConnectedClient extends Thread {
                         done = true;
                     }
                 }
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
                 done = true;
             }

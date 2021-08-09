@@ -3,7 +3,10 @@ package com.dolphln.minecraftassistant.core;
 import com.dolphln.minecraftassistant.Main;
 import com.dolphln.minecraftassistant.models.VoiceCommand;
 import com.dolphln.minecraftassistant.utils.RandomUtils;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -11,8 +14,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-
-import java.util.ArrayList;
 
 public class CommandRunner {
 
@@ -59,6 +60,7 @@ public class CommandRunner {
     public void runCommand(Player player, String command) {
         switch (command) {
             case "make time sunny" -> {
+                // TODO: Create animation (should be made with a queue, to prevent multiple people to use it at the same time)
                 player.getWorld().setTime(6000);
 
                 plugin.sendMessage(player, "Making the weather sunny...");
@@ -98,18 +100,18 @@ public class CommandRunner {
                     weather = "clear";
                 }
 
-                plugin.sendMessage(player, "Today is day " + (int) world.getGameTime()/24000 + ". The weather is " + weather + " at &6" + world.getTime() + ".");
+                plugin.sendMessage(player, "Today is day " + (int) world.getGameTime() / 24000 + ". The weather is " + weather + " at &6" + world.getTime() + ".");
             }
             case "give me velocity" -> {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 60*20, 2, false));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 60 * 20, 2, false));
                 plugin.sendMessage(player, "Giving velocity...");
             }
             case "give me jump" -> {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 15*20, 2, false));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 15 * 20, 2, false));
                 plugin.sendMessage(player, "Giving jump...");
             }
             case "give me regeneration" -> {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 5*20, 3, true));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 5 * 20, 3, true));
                 plugin.sendMessage(player, "Giving regeneration...");
             }
             case "spawn a zombie" -> {

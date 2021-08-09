@@ -17,9 +17,9 @@ public class SocketServer {
     private final Main plugin;
 
     private ServerSocket serverSocket;
-    private ArrayList<VoiceCommand> commandsToDispatch;
+    private final ArrayList<VoiceCommand> commandsToDispatch;
 
-    private HashMap<String, ConnectedClient> connectedClients;
+    private final HashMap<String, ConnectedClient> connectedClients;
 
     private Thread listeningThread;
 
@@ -70,7 +70,7 @@ public class SocketServer {
                     }
                 });
             }
-        }.runTaskTimer(plugin, 60*20L, 60*20L);
+        }.runTaskTimer(plugin, 60 * 20L, 60 * 20L);
     }
 
     public void close() {

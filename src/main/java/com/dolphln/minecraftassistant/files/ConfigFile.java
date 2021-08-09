@@ -1,9 +1,6 @@
 package com.dolphln.minecraftassistant.files;
 
 import com.dolphln.minecraftassistant.Main;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;

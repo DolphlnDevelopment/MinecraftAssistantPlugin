@@ -4,7 +4,6 @@ import com.dolphln.minecraftassistant.commands.LinkCommand;
 import com.dolphln.minecraftassistant.core.CommandRunner;
 import com.dolphln.minecraftassistant.files.ConfigFile;
 import com.dolphln.minecraftassistant.socket.SocketServer;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
