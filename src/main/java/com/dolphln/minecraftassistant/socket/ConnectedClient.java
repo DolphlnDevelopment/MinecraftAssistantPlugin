@@ -21,12 +21,16 @@ public class ConnectedClient extends Thread {
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
 
+    private boolean done;
+
     private final Socket socket;
 
     public ConnectedClient(ArrayList<VoiceCommand> commandsToDispatch, Socket socket) {
         this.commandsToDispatch = commandsToDispatch;
         this.socket = socket;
         this.linkingCode = RandomUtils.getRandomInt(111111, 999999);
+
+        this.done = false;
 
         try {
             this.socket.setKeepAlive(true);
@@ -38,8 +42,7 @@ public class ConnectedClient extends Thread {
     public void run() {
         createStreams();
 
-        boolean done = false;
-        while (!done) {
+        while (!this.done) {
             try {
                 byte messageType = dataInputStream.readByte();
 
@@ -55,16 +58,17 @@ public class ConnectedClient extends Thread {
                             String command = dataInputStream.readUTF();
                             System.out.println("Got command from " + linkedPlayer + ": " + command);
                             commandsToDispatch.add(new VoiceCommand(this, command, linkedPlayer));
-                            System.out.println(this.commandsToDispatch);
                         }
                     }
                     case -1 -> {
-                        close();
+                        System.out.println("-1");
+                        finish();
                         done = true;
                     }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+                finish();
                 done = true;
             }
         }
@@ -92,14 +96,18 @@ public class ConnectedClient extends Thread {
 
     public void closeStreams() {
         try {
-            this.dataInputStream.close();
+            if (this.dataInputStream != null) {
+                this.dataInputStream.close();
+            }
             this.dataInputStream = null;
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         try {
-            this.dataOutputStream.close();
+            if (this.dataOutputStream != null) {
+                this.dataOutputStream.close();
+            }
             this.dataOutputStream = null;
         } catch (IOException e) {
             e.printStackTrace();
@@ -122,8 +130,17 @@ public class ConnectedClient extends Thread {
             createStreams();
             dataOutputStream.writeByte(-1);
             dataOutputStream.flush();
+            finish();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void finish() {
+        try {
             closeStreams();
             this.socket.close();
+            this.done = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
