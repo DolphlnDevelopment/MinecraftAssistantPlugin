@@ -1,0 +1,7 @@
+name: Voicemc
+version: '${version}'
+main: voicemc.voicemc.VoicemcSpigot
+api-version: 1.17
+authors: [ Dolphln, Pol ]
+description: VoiceMC
+website: dolphln.com

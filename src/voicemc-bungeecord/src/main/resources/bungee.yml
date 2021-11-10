@@ -1,0 +1,4 @@
+name: Voicemc
+version: '${version}'
+main: com.dolphln.voicemc.VoicemcBungeeCord
+description: VoiceMC

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "voicemc-fabric",
+  "version": "${version}",
+
+  "name": "Voicemc",
+  "description": "VoiceMC",
+  "authors": [
+    "Dolphln",
+    "Pol"
+  ],
+  "contact": {
+    "website": "dolphln.com"
+  },
+
+  "license": "MIT",
+  "icon": "assets/voicemc-fabric/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.dolphln.voicemc.client.VoicemcFabricClient"
+    ],
+    "main": [
+      "com.dolphln.voicemc.VoicemcFabric"
+    ]
+  },
+
+          "mixins": [
+        "voicemc-fabric.mixins.json"
+      ],
+    
+  "depends": {
+    "fabricloader": ">=0.12.5",
+              "fabric": "*",
+          "minecraft": "1.17.1"
+  }
+}
